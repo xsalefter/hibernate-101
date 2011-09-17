@@ -4,7 +4,7 @@
 	<groupId>org.xsalefter.samplecode</groupId>
 	<artifactId>hibernate-101</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -12,35 +12,35 @@
 			<version>3.6.0.Final</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.6.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.9</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.12.1.GA</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.2</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
@@ -48,4 +48,37 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<tasks>
+						<taskdef name="instrument"
+							classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+							<classpath>
+								<path refid="maven.runtime.classpath" />
+								<path refid="maven.plugin.classpath" />
+							</classpath>
+						</taskdef>
+						<instrument verbose="false">
+							<fileset dir="${project.build.outputDirectory}">
+								<include name="**/entity/**/*.class" />
+							</fileset>
+						</instrument>
+					</tasks>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
