@@ -49,11 +49,22 @@ public class Main {
 		session.close();
 		sessionFactory.close();
 	}
+	
+	public void findOnly() {
+		EntityManagerFactory factory = PersistenceUtil.getJPAEntityManagerFactory();
+		EntityManager entityManager = factory.createEntityManager();
+		
+		Student student = entityManager.find(Student.class, 1L);
+		
+		entityManager.close();
+		factory.close();
+	}
 
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.runAsNativeHibernate();
 		main.runAsJavaPersistence();
+		main.findOnly();
 		
 	}
 }
