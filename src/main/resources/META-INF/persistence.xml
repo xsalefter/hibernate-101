@@ -7,11 +7,11 @@
 	<persistence-unit name="example" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
-		<class>org.xsalefter.codesample.hibernate.entity.Student</class>
+		<class>org.xsalefter.hibernate101.entity.Student</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/example" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernate_101" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="admin" />
 			
