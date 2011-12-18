@@ -3,14 +3,15 @@ package org.xsalefter.hibernate101.test.sample;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xsalefter.hibernate101.PersistenceUtil;
 import org.xsalefter.hibernate101.entity.Student;
-import org.xsalefter.hibernate101.test.SuperTest;
 
 
 /**
@@ -21,13 +22,14 @@ import org.xsalefter.hibernate101.test.SuperTest;
  * 
  * @author xsalefter (xsalefter@gmail.com)
  */
-public class BasicAnnotationSampleTest extends SuperTest {
+public class BasicAnnotationSampleTest {
 	
 	private Logger logger = LoggerFactory.getLogger(BasicAnnotationSampleTest.class);
 
 	@Test
 	public void runByUsingHibernateSession() {
-		Session session = super.sessionFactory.openSession();
+		SessionFactory sessionFactory = PersistenceUtil.getHibernateSessionfactory();
+		Session session = sessionFactory.openSession();
 		
 		@SuppressWarnings("unchecked")
 		List<Student> students = session.
@@ -39,13 +41,16 @@ public class BasicAnnotationSampleTest extends SuperTest {
 			logger.info(">>>>> Student ID: {} - Student Name: {}.", student.getId(), student.getName());
 		}
 		
+		session.clear();
 		session.close();
+		sessionFactory.close();
 	}
 	
 	
 	@Test
 	public void runByUsingJPAEntityManager() {
-		EntityManager entityManager = PersistenceUtil.getJPAEntityManagerFactory().createEntityManager();
+		EntityManagerFactory entityManagerFactory = PersistenceUtil.getJPAEntityManagerFactory();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		@SuppressWarnings("unchecked")
 		List<Student> students = entityManager.
@@ -57,6 +62,8 @@ public class BasicAnnotationSampleTest extends SuperTest {
 			logger.info(">>>>> Student ID: {} - Student Name: {}.", student.getId(), student.getName());
 		}
 		
+		entityManager.clear();
 		entityManager.close();
+		entityManagerFactory.close();
 	}
 }
