@@ -1,10 +1,10 @@
-### Hibernate 101 ###
+# Hibernate 101 #
 This is a sample hibernate project that show you various use case with 
 hibernate.
 
 
 ## Branch ##
-# race-condition #
+### race-condition ###
 Show a race-condition when trying to 
 - SessionFactory#openSession() and
 - EntityManagerFactory#createEntityManager()
