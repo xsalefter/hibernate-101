@@ -1,4 +1,4 @@
-package org.xsalefter.hibernate101.test.sample;
+package org.xsalefter.hibernate101.test.basicannotation;
 
 import java.util.List;
 import javax.persistence.Basic;
@@ -15,16 +15,38 @@ import org.xsalefter.hibernate101.entity.Student;
 
 
 /**
- * Show how to use {@link Basic} annotation. {@link Basic} annotation need 
- * special configuration (byte code instrumentation) when you build a source 
- * code. You could see maven pom xml configuration on this project to see 
- * more.
+ * <p>
+ * Show how to use {@link Basic} annotation in basic object: {@link String}, 
+ * {@link Integer}, etc. {@link Basic} annotation that applied to basic object 
+ * mapping need special configuration (byte code instrumentation) when you build 
+ * a source code. You could see maven pom xml configuration on this project to 
+ * see more.
+ * </p>
+ * 
+ * <p>
+ * {@link BasicAnnotationSampleTest#runByUsingJPAEntityManager()} and 
+ * {@link BasicAnnotationSampleTest#runByUsingHibernateSession()} show you 
+ * when we querying the object, (on this case 's') not all properties loaded.
+ * You could see on the query result produced by hibernate querying
+ * {@link Student#getId()} and {@link Student#getName()} only:
+ * <code><br/>
+ * select student0_.student_id as student1_2_, student0_.name as name2_ from student student0_
+ * </code><br/>
+ * <p>
+ * 
+ * </p>
+ * This is happen because on both method we only <strong>requesting</strong> id 
+ * and name:
+ * <code><br/>
+ * logger.info(">>>>> Student ID: {} - Student Name: {}.", student.getId(), student.getName());
+ * </code><br/>
+ * </p>
  * 
  * @author xsalefter (xsalefter@gmail.com)
  */
 public class BasicAnnotationSampleTest {
 	
-	private Logger logger = LoggerFactory.getLogger(BasicAnnotationSampleTest.class);
+	private Logger logger = LoggerFactory.getLogger("BasicAnnotationSampleTest >>>>>");
 
 	@Test
 	public void runByUsingHibernateSession() {
