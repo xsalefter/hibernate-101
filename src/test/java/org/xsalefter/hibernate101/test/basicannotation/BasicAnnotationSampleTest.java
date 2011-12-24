@@ -58,9 +58,9 @@ public class BasicAnnotationSampleTest {
 			createQuery("select s from Student s").
 			list();
 		
-		logger.info(">>>>> #runByUsingHibernateSession()");
+		logger.info("#runByUsingHibernateSession()");
 		for (Student student : students) {
-			logger.info(">>>>> Student ID: {} - Student Name: {}.", student.getId(), student.getName());
+			logger.info("Student ID: {} - Student Name: {}.", student.getId(), student.getName());
 		}
 		
 		session.clear();
@@ -79,9 +79,9 @@ public class BasicAnnotationSampleTest {
 			createQuery("select s from Student s").
 			getResultList();
 		
-		logger.info(">>>>> #runByUsingJPAEntityManager()");
+		logger.info("#runByUsingJPAEntityManager()");
 		for (Student student : students) {
-			logger.info(">>>>> Student ID: {} - Student Name: {}.", student.getId(), student.getName());
+			logger.info("Student ID: {} - Student Name: {}.", student.getId(), student.getName());
 		}
 		
 		entityManager.clear();
