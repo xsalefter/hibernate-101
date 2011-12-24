@@ -14,5 +14,7 @@
 		<property name="hibernate.hbm2ddl.import_files">import.sql</property>
 		
 		<mapping class="org.xsalefter.hibernate101.entity.Student" />
+		<mapping class="org.xsalefter.hibernate101.entity.ProductCategory" />
+		<mapping class="org.xsalefter.hibernate101.entity.Product" />
 	</session-factory>
 </hibernate-configuration>
